@@ -7,4 +7,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="FishMarket.Api" />
+    <InternalsVisibleTo Include="FishMarket.Tests" />
+  </ItemGroup>
 </Project>
