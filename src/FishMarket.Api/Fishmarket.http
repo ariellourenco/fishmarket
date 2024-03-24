@@ -1,0 +1,10 @@
+### Create a user
+@password = 123Mudar!
+
+POST http://localhost:5169/users
+Content-Type: application/json
+
+{
+    "email": "myuser@test.com",
+    "password": "{{password}}"
+}
