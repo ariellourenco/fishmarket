@@ -5,8 +5,8 @@ the current instantaneous market rates of various fishes.
 
 The application features:
 
-- Fish.Web - An ASP.NET Core hosted Blazor WASM front end application.
-- Fish.Api - An ASP.NET Core REST API backend using minimal APIs.
+- FishMarket.Web - An ASP.NET Core hosted Blazor WASM front end application.
+- [FishMarket.Api](src/FishMarket.Api/) - An ASP.NET Core REST API backend using minimal APIs.
 
 It showcases:
 
@@ -28,4 +28,6 @@ It showcases:
 ### Database
 
 1. Install the **dotnet-ef** tool: `dotnet tool install dotnet-ef -g`
-2. 
+2. Navigate to the `FishMarket.Api` folder.
+    - Run `mkdir .db` to create the local database folder.
+    - Run `dotnet ef database update` to create the database.
