@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6E3ABC1D-75C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishMarket.Api", "src\FishMarket.Api\FishMarket.Api.csproj", "{DFFBA108-CC86-44E2-A672-B983D8BE3D52}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{657AF142-7A49-477B-A018-9D89D8D2AC2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishMarket.Tests", "tests\FishMarket.Tests\FishMarket.Tests.csproj", "{A9A93447-E62B-47BB-ABD7-7794B0906FE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +21,16 @@ Global
 		{DFFBA108-CC86-44E2-A672-B983D8BE3D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFFBA108-CC86-44E2-A672-B983D8BE3D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFFBA108-CC86-44E2-A672-B983D8BE3D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9A93447-E62B-47BB-ABD7-7794B0906FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9A93447-E62B-47BB-ABD7-7794B0906FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9A93447-E62B-47BB-ABD7-7794B0906FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9A93447-E62B-47BB-ABD7-7794B0906FE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DFFBA108-CC86-44E2-A672-B983D8BE3D52} = {6E3ABC1D-75C9-4CAC-8565-A2E6CC5A1A38}
+		{A9A93447-E62B-47BB-ABD7-7794B0906FE9} = {657AF142-7A49-477B-A018-9D89D8D2AC2F}
 	EndGlobalSection
 EndGlobal
