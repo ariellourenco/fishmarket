@@ -5,7 +5,7 @@ using FishMarket.Api.Endpoints;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure database
-builder.Services.AddSqlite<FishMarketDbContext>("Data Source=.db/Todos.db");
+builder.Services.AddSqlite<FishMarketDbContext>(builder.Configuration.GetConnectionString("Default"));
 
 // Configure Identity
 builder.Services.AddIdentityCore<AppUser>()
