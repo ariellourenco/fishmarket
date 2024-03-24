@@ -1,5 +1,6 @@
 using FishMarket.Api.Data;
 using FishMarket.Api.Domain;
+using FishMarket.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddIdentityCore<AppUser>()
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+// Configure the APIs
+app.MapUsers();
 
 app.Run();
