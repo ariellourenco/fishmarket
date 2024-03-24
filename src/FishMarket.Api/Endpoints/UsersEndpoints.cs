@@ -12,6 +12,7 @@ public static class UsersEndpoints
         var group = routes.MapGroup("/users");
 
         group.MapPost("/", CreateUserAsync);
+        group.WithParameterValidation(typeof(UserInfo));
         group.WithTags("Users");
 
         return group;
