@@ -1,9 +1,9 @@
-namespace FishMarket.Api.Endpoints;
-
-using FishMarket.Api.Domain;
-using System.ComponentModel.DataAnnotations;
+using FishMarket.Api.Dtos;
+using FishMarket.Api.Filters;
+using FishMarket.Api.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
+
+namespace FishMarket.Api.Endpoints;
 
 public static class UsersEndpoints
 {
@@ -34,20 +34,4 @@ public static class UsersEndpoints
 
         return (Results<Ok, ValidationProblem>)TypedResults.Ok();
     }
-}
-
-public class UserInfo
-{
-    [Required]
-    public string Email { get; set; } = default!;
-
-    [Required]
-    public string Password { get; set; } = default!;
-}
-
-public class UserServices(ILogger<UserServices> logger, UserManager<AppUser> userManager)
-{
-    public ILogger<UserServices> Logger { get; } = logger;
-
-    public UserManager<AppUser> UserManager { get; set; } = userManager;
 }
