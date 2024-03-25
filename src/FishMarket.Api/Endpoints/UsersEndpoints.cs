@@ -12,6 +12,7 @@ public static class UsersEndpoints
         var group = routes.MapGroup("/users");
 
         group.MapPost("/", CreateUserAsync);
+        group.MapPost("/token", GetTokenAsync);
         group.WithParameterValidation(typeof(UserInfo));
         group.WithTags("Users");
 
@@ -35,4 +36,15 @@ public static class UsersEndpoints
 
         return (Results<Ok, ValidationProblem>)TypedResults.Ok();
     }
+
+    private static async Task<Results<BadRequest, Ok<AuthToken>>> GetTokenAsync(UserInfo user, [AsParameters] UserServices services)
+    {
+        var entity = await services.UserManager.FindByEmailAsync(user.Email);
+
+        return entity is not null || await services.UserManager.CheckPasswordAsync(entity!, user.Password)
+            ? TypedResults.Ok(new AuthToken(services.TokenService.GenerateToken(entity!.NormalizedEmail!)))
+            : TypedResults.BadRequest();
+    }
 }
+
+public record AuthToken(string Token);

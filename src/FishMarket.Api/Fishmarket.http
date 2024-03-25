@@ -8,3 +8,12 @@ Content-Type: application/json
     "email": "myuser@test.com",
     "password": "{{password}}"
 }
+
+### Get a token
+POST http://localhost:5169/users/token
+Content-Type: application/json
+
+{
+    "email": "myuser@test.com",
+    "password": "{{password}}"
+}
