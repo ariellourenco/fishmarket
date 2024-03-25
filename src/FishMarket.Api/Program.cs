@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configure authentication & authorization
 builder.Services.AddAuthentication().AddJwtBearer();
+builder.Services.AddAuthorizationBuilder().AddCurrentUserHandler();
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
 // Configure database
@@ -16,6 +17,9 @@ builder.Services.AddSqlite<FishMarketDbContext>(builder.Configuration.GetConnect
 // Configure Identity
 builder.Services.AddIdentityCore<AppUser>()
     .AddEntityFrameworkStores<FishMarketDbContext>();
+
+// Configure Services
+builder.Services.AddCurrentUser();
 
 var app = builder.Build();
 
