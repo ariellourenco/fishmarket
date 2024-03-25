@@ -11,8 +11,15 @@ namespace FishMarket.Api.Data;
 /// </summary>
 public sealed class FishMarketDbContext(DbContextOptions<FishMarketDbContext> options): IdentityUserContext<AppUser, int>(options)
 {
+    public DbSet<Fish> Fishes => Set<Fish>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Fish>()
+            .HasOne<AppUser>()
+            .WithMany()
+            .HasForeignKey(entity => entity.OwnerId);
+
         base.OnModelCreating(builder);
 
         // Customize the ASP.NET Identity model and override the default table names.
