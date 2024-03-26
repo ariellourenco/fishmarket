@@ -1,4 +1,8 @@
+using System.Net.Http.Headers;
 using FishMarket.Api.Data;
+using FishMarket.Api.Domain;
+using FishMarket.Api.Infrastructure.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace FishMarket.Tests;
 
@@ -20,6 +24,25 @@ internal sealed class TestServerFactory : WebApplicationFactory<Program>
         db.Database.EnsureCreated();
         return db;
     }
+
+    public async Task CreateUserAsync(string email, string? password = null)
+    {
+        using var scope = Services.CreateScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+        var newUser = new AppUser { Email = email, UserName = email};
+        var result = await userManager.CreateAsync(newUser, password ?? Guid.NewGuid().ToString());
+
+        Assert.True(result.Succeeded);
+    }
+
+    public HttpClient CreateClient(string email) =>
+        CreateDefaultClient(new TestAuthenticationHandler(request =>
+        {
+            var service = Services.GetRequiredService<ITokenService>();
+            var token = service.GenerateToken(email);
+
+            request.Headers.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, token);
+        }));
 
     protected override IHost CreateHost(IHostBuilder builder)
     {
@@ -51,5 +74,16 @@ internal sealed class TestServerFactory : WebApplicationFactory<Program>
         _connection.Dispose();
 
         base.Dispose(disposing);
+    }
+
+    private sealed class TestAuthenticationHandler(Action<HttpRequestMessage> onRequest) : DelegatingHandler
+    {
+        private readonly Action<HttpRequestMessage> _onRequest = onRequest;
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            _onRequest(request);
+            return base.SendAsync(request, cancellationToken);
+        }
     }
 }
