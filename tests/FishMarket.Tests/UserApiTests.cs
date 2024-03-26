@@ -50,7 +50,7 @@ public sealed class UserApiTests
         Assert.NotNull(problemDetails);
         Assert.Equal("One or more validation errors occurred.", problemDetails.Title);
         Assert.NotEmpty(problemDetails.Errors);
-        Assert.Equal(["The Email field is required."], problemDetails.Errors["Email"]);
+        Assert.Equal(new [] {"The Email field is required."}, problemDetails.Errors["Email"]);
     }
 
     [Fact]
@@ -73,6 +73,6 @@ public sealed class UserApiTests
         Assert.NotNull(problemDetails);
         Assert.Equal("One or more validation errors occurred.", problemDetails.Title);
         Assert.NotEmpty(problemDetails.Errors);
-        Assert.Equal(["The Password field is required."], problemDetails.Errors["Password"]);
+        Assert.Equal(new[] {"The Password field is required."}, problemDetails.Errors["Password"]);
     }
 }
