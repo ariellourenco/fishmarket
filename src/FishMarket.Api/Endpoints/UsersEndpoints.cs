@@ -1,6 +1,6 @@
 using FishMarket.Api.Dtos;
-using FishMarket.Api.Filters;
 using FishMarket.Api.Services;
+using FishMarket.Api.Extensions;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FishMarket.Api.Endpoints;

@@ -1,8 +1,8 @@
-using System.Reflection;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Http.Metadata;
 using MiniValidation;
 
-namespace FishMarket.Api.Filters;
+namespace FishMarket.Api.Extensions;
 
 public static class ValidationFilterExtensions
 {
