@@ -17,11 +17,14 @@ public static class FishEndpoints
         // Add security requirements, all incoming requests to this API MUST
         // be authenticated with a valid user.
         group.RequireAuthorization(policy => policy.RequireCurrentUser());
+
         group.MapPost("/", CreateFishAsync);
         group.MapPut("/{id:int}", UpdateFishAsync);
         group.MapDelete("/{id:int}", DeleteAsync);
         group.MapGet("/", GetAllAsync);
         group.MapGet("/{id:int}", GetAsync);
+
+        group.WithParameterValidation(typeof(FishDto));
         group.WithTags("Fishes");
 
         return group;
