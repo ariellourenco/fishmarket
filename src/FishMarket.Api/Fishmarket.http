@@ -1,6 +1,8 @@
-### Create a user
-@password = 123Mudar!
+@password = <Password>
 
+@token = <JWT Token>
+
+### Create a user
 POST http://localhost:5169/users
 Content-Type: application/json
 
@@ -17,3 +19,39 @@ Content-Type: application/json
     "email": "myuser@test.com",
     "password": "{{password}}"
 }
+
+### Create a fish
+POST http://localhost:5169/fishes
+Authorization:  Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Fish 1",
+    "price": 10.5
+}
+
+### Update a fish
+PUT http://localhost:5169/fishes/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "id": 2,
+    "name": "Fish 2",
+    "price": 20.5
+}
+
+### Delete a fish
+DELETE http://localhost:5169/fishes/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### Get all fishes
+GET http://localhost:5169/fishes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### Get a fish
+GET http://localhost:5169/fishes/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
