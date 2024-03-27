@@ -1,8 +1,10 @@
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using FishMarket.Api.Data;
 using FishMarket.Api.Domain;
 using FishMarket.Api.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 
 namespace FishMarket.Tests;
 
@@ -63,6 +65,17 @@ internal sealed class TestServerFactory : WebApplicationFactory<Program>
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
             });
+
+            // Configure the signing key for CI scenarios
+            var key = new byte[32];
+            RandomNumberGenerator.Fill(key);
+
+            builder.ConfigureAppConfiguration(configuration =>
+                configuration.AddInMemoryCollection(new Dictionary<string, string?>
+                {
+                    ["Authentication:Schemes:Bearer:SigningKeys:0:Issuer"] = "dotnet-user-jwts",
+                    ["Authentication:Schemes:Bearer:SigningKeys:0:Value"] = Convert.ToBase64String(key)
+                }));
         });
 
         return base.CreateHost(builder);
