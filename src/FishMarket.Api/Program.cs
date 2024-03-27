@@ -21,7 +21,17 @@ builder.Services.AddIdentityCore<AppUser>()
 // Configure Services
 builder.Services.AddCurrentUser();
 
+// Configure Open API
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(o => o.InferSecuritySchemes());
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Configure the APIs
 app.MapFishes();

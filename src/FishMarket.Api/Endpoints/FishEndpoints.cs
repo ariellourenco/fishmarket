@@ -6,7 +6,6 @@ using FishMarket.Api.Helpers;
 using FishMarket.Api.Infrastructure.Authorization;
 using FishMarket.Api.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FishMarket.Api.Endpoints;
@@ -21,7 +20,7 @@ public static class FishEndpoints
 
         // Add security requirements, all incoming requests to this API MUST
         // be authenticated with a valid user.
-        group.RequireAuthorization(policy => policy.RequireCurrentUser());
+        group.RequireAuthorization(policy => policy.RequireCurrentUser()).AddOpenApiSecurityRequirement();
 
         group.MapPost("/", CreateFishAsync);
         group.MapPost("/{id:int}/image", UploadImageAsync).DisableAntiforgery();
@@ -103,7 +102,9 @@ public static class FishEndpoints
         return TypedResults.Ok(fishes);
     }
 
-    private static async Task<Results<Ok, BadRequest<string>, NotFound, ProblemHttpResult>> UploadImageAsync(int id, IFormFile file, [AsParameters] FishService services)
+    private static async Task<Results<Ok, BadRequest<string>, NotFound, ProblemHttpResult>> UploadImageAsync(int id,
+        IFormFile file,
+        [AsParameters] FishService services)
     {
         // This check doesn't catch files that only have a BOM as their content.
         // https://en.wikipedia.org/wiki/Byte_order_mark
