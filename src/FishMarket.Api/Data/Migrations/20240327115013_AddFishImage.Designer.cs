@@ -3,6 +3,7 @@ using System;
 using FishMarket.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FishMarket.Api.Data.Migrations
 {
     [DbContext(typeof(FishMarketDbContext))]
-    partial class FishMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240327115013_AddFishImage")]
+    partial class AddFishImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.3");

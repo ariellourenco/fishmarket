@@ -12,5 +12,7 @@ public sealed class Fish
     [Required]
     public decimal Price { get; set; }
 
+    public Image? Image { get; set; }
+
     public int OwnerId { get; set; }
 }
