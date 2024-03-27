@@ -12,4 +12,6 @@ public class FishDto
     [Required]
     [Range(0.01, 1000)]
     public decimal Price { get; init; }
+
+    public string? Image { get; set; }
 }

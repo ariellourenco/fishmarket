@@ -1,5 +1,5 @@
 @password = <Password>
-
+@file = <File Path>
 @token = <JWT Token>
 
 ### Create a user
@@ -40,6 +40,18 @@ Content-Type: application/json
     "name": "Fish 2",
     "price": 20.5
 }
+
+### Upload a fish image
+POST http://localhost:5169/fishes/2/image
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="{{file}}"
+Content-Type: application/octet-stream
+
+< {{file}}
+--WebAppBoundary--
 
 ### Delete a fish
 DELETE http://localhost:5169/fishes/2
