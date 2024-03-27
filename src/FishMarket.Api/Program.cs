@@ -25,6 +25,7 @@ var app = builder.Build();
 
 // Configure the APIs
 app.MapFishes();
+app.MapStock();
 app.MapUsers();
 
 app.Run();
