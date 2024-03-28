@@ -86,7 +86,8 @@ public static class FishEndpoints
     }
 
     private static async Task<Results<Ok<FishDto>, NotFound>> GetAsync(int id, [AsParameters] FishService services) =>
-        await services.Context.Fishes.FindAsync(id) switch
+        await services.Context.Fishes.Include(entity => entity.Image)
+            .SingleOrDefaultAsync(entity => entity.Id == id) switch
         {
             Fish fish when fish.OwnerId == services.CurrentUser.User!.Id => TypedResults.Ok(fish.AsDto()),
             _ => TypedResults.NotFound()
@@ -94,7 +95,7 @@ public static class FishEndpoints
 
     private static async Task<Ok<List<FishDto>>> GetAllAsync([AsParameters] FishService services)
     {
-        var fishes = await services.Context.Fishes.Where(fish => fish.OwnerId == services.CurrentUser.User!.Id)
+        var fishes = await services.Context.Fishes.Where(entity => entity.OwnerId == services.CurrentUser.User!.Id)
             .Select(fish => fish.AsDto())
             .AsNoTracking()
             .ToListAsync();
@@ -137,12 +138,16 @@ public static class FishEndpoints
 
         stream.Position = 0;
 
-        var fish = await services.Context.Fishes.FindAsync(id);
+        var fish = await services.Context.Fishes.Include(entity => entity.Image)
+            .SingleOrDefaultAsync(entity =>
+                entity.Id == id &&
+                entity.OwnerId == services.CurrentUser.User!.Id);
 
-        if (fish is null || fish.OwnerId != services.CurrentUser.User!.Id)
+        if (fish is null)
             return TypedResults.NotFound();
 
-        fish.Image = new() { Data = stream.ToArray() };
+        fish.Image ??= new Image();
+        fish.Image.Data = stream.ToArray();
 
         await services.Context.SaveChangesAsync();
 

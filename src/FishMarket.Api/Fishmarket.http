@@ -3,31 +3,31 @@
 @token = <JWT Token>
 
 ### Create a user
-POST http://localhost:5169/users
+POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "email": "myuser@test.com",
+    "email": "user@example.com",
     "password": "{{password}}"
 }
 
 ### Get a token
-POST http://localhost:5169/users/token
+POST http://localhost:5000/users/token
 Content-Type: application/json
 
 {
-    "email": "myuser@test.com",
+    "email": "user@example.com",
     "password": "{{password}}"
 }
 
 ### Create a fish
-POST http://localhost:5169/fishes
+POST http://localhost:5000/fishes
 Authorization:  Bearer {{token}}
 Content-Type: application/json
 
 {
-    "name": "Fish 1",
-    "price": 10.5
+    "name": "Dolly",
+    "price": 100.5
 }
 
 ### Update a fish
@@ -42,7 +42,7 @@ Content-Type: application/json
 }
 
 ### Upload a fish image
-POST http://localhost:5169/fishes/2/image
+POST http://localhost:5000/fishes/9/image
 Authorization: Bearer {{token}}
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
@@ -54,16 +54,16 @@ Content-Type: application/octet-stream
 --WebAppBoundary--
 
 ### Delete a fish
-DELETE http://localhost:5169/fishes/2
+DELETE http://localhost:5000/fishes/7
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 ### Get all fishes
-GET http://localhost:5169/fishes
+GET http://localhost:5000/fishes
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 ### Get a fish
-GET http://localhost:5169/fishes/2
+GET http://localhost:5000/fishes/9
 Authorization: Bearer {{token}}
 Content-Type: application/json
