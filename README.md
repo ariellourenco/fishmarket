@@ -51,6 +51,7 @@ To run the application, you can run the [FishMarket.Api](src/FishMarket.Api)
 ### Using the API standalone
 The FishMarket REST API can run standalone as well. You can run the [FishMarket.Api](src/FishMarket.Api) project and make requests to various endpoints using the Swagger UI (or a client of your choice):
 
+![Screenshot 2024-03-28 at 09 56 55](https://github.com/ariellourenco/fishmarket/assets/16090192/abb88c4a-4018-4eef-8b03-9de75b9328f6)
 
 Before executing any requests, you need to create a user and get an auth token.
 
@@ -63,6 +64,10 @@ Before executing any requests, you need to create a user and get an auth token.
     }
     ```
 2. Get the returned token and add it to the AUTHORIZE window. You should be able to use this token to make authenticated requests to the protected endpoints.
+   
+![Screenshot 2024-03-28 at 09 58 25](https://github.com/ariellourenco/fishmarket/assets/16090192/6da489d3-f559-4961-9586-1e6c76518bf2)
 
-> [!WARNING] 
-> Due to a bug on Swagger UI you cannot test the file uplaod endpoint using it. See [https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/2625](https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/2625) for further details.
+> [!IMPORTANT] 
+> Due to a bug on Swagger UI you cannot test the file uplaod endpoint using it. See [https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/2625](https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/2625) for further details. Moreover, it worths note that all images uploaded to the app are
+> saved on the database as blob and retrieved as base64 string. However, in most production scenarios those files should be saved on a file storage such as
+> Azure Blob Storage and made available for the app usage only after scanning the file's contents using an anti-virus/anti-malware scanner API. 
