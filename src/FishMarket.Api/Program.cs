@@ -1,6 +1,7 @@
 using FishMarket.Api.Data;
 using FishMarket.Api.Domain;
 using FishMarket.Api.Endpoints;
+using FishMarket.Api.Extensions;
 using FishMarket.Api.Infrastructure.Authentication;
 using FishMarket.Api.Infrastructure.Authorization;
 
@@ -32,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseGlobalExceptionHandler();
 
 // Configure the APIs
 app.MapFishes();
