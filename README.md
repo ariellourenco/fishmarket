@@ -1,5 +1,7 @@
 # FISH MARKET
 
+[![.NET Core CI](https://github.com/ariellourenco/fishmarket/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ariellourenco/fishmarket/actions/workflows/dotnet.yml)
+
 This is a Fish Market application through which fish market brokers can evaluate
 the current instantaneous market rates of various fishes. 
 
