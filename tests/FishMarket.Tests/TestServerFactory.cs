@@ -55,7 +55,7 @@ internal sealed class TestServerFactory : WebApplicationFactory<Program>
             services.AddDbContextFactory<FishMarketDbContext>();
             services.AddDbContextOptions<FishMarketDbContext>(options => options.UseSqlite(_connection));
 
-            // Lower the requirements for the tests
+            // Lower the requirements for the tests.
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
@@ -64,6 +64,7 @@ internal sealed class TestServerFactory : WebApplicationFactory<Program>
                 options.Password.RequiredLength = 1;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
+                options.SignIn.RequireConfirmedEmail = false;
             });
 
             // Configure the signing key for CI scenarios

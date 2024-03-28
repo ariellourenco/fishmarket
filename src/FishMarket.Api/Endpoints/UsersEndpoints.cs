@@ -34,6 +34,12 @@ public static class UsersEndpoints
 
         services.Logger.LogInformation("Successfully created '{email}' user", user.Email);
 
+        // We can safely ignore the result of this operation as it uses a fake Email service just
+        // for demonstration sake.
+        await services.EmailSender.SendEmailAsync(user.Email.ToLower(),
+            "Welcome to FishMarket",
+            "You have successfully created an account at FishMarket!");
+
         return (Results<Ok, ValidationProblem>)TypedResults.Ok();
     }
 

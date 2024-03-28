@@ -4,6 +4,7 @@ using FishMarket.Api.Endpoints;
 using FishMarket.Api.Extensions;
 using FishMarket.Api.Infrastructure.Authentication;
 using FishMarket.Api.Infrastructure.Authorization;
+using FishMarket.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,11 +17,16 @@ builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddSqlite<FishMarketDbContext>(builder.Configuration.GetConnectionString("Default"));
 
 // Configure Identity
-builder.Services.AddIdentityCore<AppUser>()
-    .AddEntityFrameworkStores<FishMarketDbContext>();
+builder.Services.AddIdentityCore<AppUser>(options =>
+{
+    // I don't want to require email confirmation for this demo.
+    options.SignIn.RequireConfirmedEmail = false;
+    options.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<FishMarketDbContext>();
 
 // Configure Services
 builder.Services.AddCurrentUser();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Configure Open API
 builder.Services.AddEndpointsApiExplorer();
